@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - MyLeasings</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel=" stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
 <body>
     <header>
@@ -24,6 +25,52 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archivo</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-controller="Managers" asp-action="Index"><i class=" fas fa-user-alt"></i>Managers</a>
+                                    <a class="dropdown-item" asp-controller="PropertyTypes" asp-action="Index"><i class=" fas fa-object-group"></i>Tipos de Propiedad</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Owners" asp-action="Index"><i class="fas fa-key"></i>Propietarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Lessees" asp-action="Index"><i class=" fas fa-house-user"></i>Arrendatarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contracts" asp-action="Index"><i class="fas fa-file"></i>Contratos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Index"><i class=" fas fa-home"></i>Propiedades</a>
+                            </li>
+
+                        }
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ChangeUser"><i class="fas fa-user-circle "></i>@User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Salir</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Iniciar Sesión><i class="fas fa-user-shield "></i></a>
+                            </li>
+
+                        }
                     </ul>
                 </div>
             </div>
